@@ -1,0 +1,4 @@
+src/lib/hash.lo: \
+  /Users/gkurl/Documents/roman-numerals-api-main/xdebug-3.4.5/src/lib/hash.c \
+  /Users/gkurl/Documents/roman-numerals-api-main/xdebug-3.4.5/src/lib/hash.h \
+  /Users/gkurl/Documents/roman-numerals-api-main/xdebug-3.4.5/src/lib/llist.h

@@ -39,6 +39,8 @@ class RomanNumeralTest extends TestCase
             $this->assertSame($returnValue, $this->converter->convertInteger($integer));
         }
 
+        //$this->converter->convertInteger(1995);
+
         // Test more unique integers
         $this->assertSame('MMMCMXCIX', $this->converter->convertInteger(3999));
         $this->assertSame('MMXVI', $this->converter->convertInteger(2016));
