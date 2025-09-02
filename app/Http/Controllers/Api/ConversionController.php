@@ -14,7 +14,7 @@ class ConversionController extends Controller
         protected ConversionService $conversionService
     ){}
 
-    //not sure if $request->integer is valid yet
+    //not sure if $request->integer is valid yet as command not written fully yet
     public function convert(ConversionRequest $request): ConversionResource
     {
         $convertedInteger = $this->conversionService->convertAndRecord($request->integer);
