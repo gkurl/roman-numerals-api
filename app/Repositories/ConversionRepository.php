@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class ConversionRepository implements ConversionRepositoryInterface
 {
 
-    // Thought about maybe using DI here
+// Thought about maybe using DI here
 
 //    protected ConversionStat $conversionStat;
 //

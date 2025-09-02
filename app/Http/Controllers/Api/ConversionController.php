@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConversionRequest;
+use App\Http\Requests\StatsRequest;
 use App\Http\Resources\ConversionResource;
 use App\Services\ConversionServiceInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
 
 class ConversionController extends Controller
@@ -28,15 +30,17 @@ class ConversionController extends Controller
         return new ConversionResource($convertedInteger);
     }
 
-    public function recent(ConversionRequest $request): ConversionResource
+    public function recent(StatsRequest $statsRequest): AnonymousResourceCollection
     {
-        $recentConversions = $this->conversionService->findRecent($request->integer);
-        return new ConversionResource($recentConversions);
+        $limit = $statsRequest->validatedLimit();
+        $recentConversions = $this->conversionService->findRecent($limit);
+        return ConversionResource::collection($recentConversions);
     }
 
-    public function top(ConversionRequest $request): ConversionResource
+    public function top(StatsRequest $statsRequest): AnonymousResourceCollection
     {
-        $topConversions = $this->conversionService->findTop($request->integer);
-        return new ConversionResource($topConversions);
+        $limit = $statsRequest->validatedLimit();
+        $topConversions = $this->conversionService->findTop($limit);
+        return ConversionResource::collection($topConversions);
     }
 }

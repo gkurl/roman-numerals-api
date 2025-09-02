@@ -18,7 +18,7 @@ class ConversionResource extends JsonResource
             'integer_value' => $this->integer_value,
             'roman' => $this->roman,
             'conversions_count' => $this->conversions_count,
-            'last_converted_at' => $this->last_converted_at
+            'last_converted_at' => $this->last_converted_at->format('Y-m-d H:i:s'),
         ];
     }
 }

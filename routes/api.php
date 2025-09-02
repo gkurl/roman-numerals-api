@@ -29,8 +29,8 @@ Route::post('user/register',[UserController::class,'register'])->name('user.regi
 Route::post('user/login',[UserController::class,'login'])->name('user.login');
 
 // Integer -> Roman conversion API routes
-Route::middleware('auth:sanctum')->post('convert', [ConversionController::class, 'convert'])->name('api.convert');
-Route::middleware('auth:sanctum')->get('recent', [ConversionController::class, 'recent'])->name('api.recent');
-Route::middleware('auth:sanctum')->get('top', [ConversionController::class, 'top'])->name('api.top');
+Route::post('convert', [ConversionController::class, 'convert'])->name('api.convert')->middleware(['auth:sanctum', 'correlation']);
+Route::get('recent', [ConversionController::class, 'recent'])->name('api.recent')->middleware(['auth:sanctum']);
+Route::get('top', [ConversionController::class, 'top'])->name('api.top')->middleware(['auth:sanctum']);
 
 
