@@ -52,6 +52,12 @@ return [
     */
 
     'channels' => [
+        'conversions' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/conversions.log'),
+            'level' => 'info',
+            'days' => 14,
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
