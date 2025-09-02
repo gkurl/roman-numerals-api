@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConversionRequest;
 use App\Http\Resources\ConversionResource;
-use App\Services\ConversionService;
+use App\Services\ConversionServiceInterface;
 
 class ConversionController extends Controller
 {
 
     public function __construct(
-        protected ConversionService $conversionService
+        protected ConversionServiceInterface $conversionService
     ){}
 
     //not sure if $request->integer is valid yet as command not written fully yet
