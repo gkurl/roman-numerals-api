@@ -16,7 +16,8 @@ class ConversionValidationRules
     public static function messages(): array
     {
         return [
-            'integer.between' => 'The integer must be between 1 and 3999.',
+            'integer.integer' => 'The :attribute must be a number between 1 and 3999.',
+            'integer.between' => 'The :attribute must be between 1 and 3999.',
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Models\ConversionStat;
 use App\Repositories\ConversionRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 //Could also be a 'final' class if not extended elsewhere
 class ConversionService implements ConversionServiceInterface
@@ -20,7 +21,28 @@ class ConversionService implements ConversionServiceInterface
         $roman = $this->romanNumeralConverter->convertInteger($integer);
         $now = Carbon::now();
 
-        return $this->conversionRepository->upsertOrIncrement($integer, $roman, $now);
+        try {
+            $convertedOutput = $this->conversionRepository->upsertOrIncrement($integer, $roman, $now);
+
+            Log::channel('conversions')->info('conversion.recorded', [
+                'user_id' => optional(auth()->user())->id,
+                'integer' => $integer,
+                'roman' => $roman,
+                'conversions_count' => $convertedOutput->conversions_count,
+                'last_converted_at' => $convertedOutput->last_converted_at?->toIso8601String(),
+                'correlation_id' => request()?->attributes->get('correlation_id'),
+            ]);
+
+            return $convertedOutput;
+        } catch(\Throwable $e) {
+            Log::channel('conversions')->error('conversion.failed', [
+                'user_id' => optional(auth()->user())->id,
+                'integer' => $integer,
+                'roman' => $roman,
+                'error' => $e->getMessage(),
+                'correlation_id' => request()?->attributes->get('correlation_id'),
+            ]);
+        }
     }
 
     public function findTop(int $limit): Collection {
