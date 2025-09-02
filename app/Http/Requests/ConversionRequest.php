@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Validation\ConversionValidationRules;
 
 class ConversionRequest extends FormRequest
 {
@@ -22,8 +23,10 @@ class ConversionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'integer' => 'required|integer|between:1,3999',
-        ];
+        return ConversionValidationRules::rules();
+    }
+
+    public function messages(): array {
+        return ConversionValidationRules::messages();
     }
 }
