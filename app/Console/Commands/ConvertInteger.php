@@ -36,7 +36,7 @@ class ConvertInteger extends Command
      */
     public function handle()
     {
-       $input = $this->argument('integer') ?? $this->ask('Enter your number (1-3999)');
+       $input = $this->argument('integer');
 
        $validator = Validator::make(
            ['integer' => $input],
