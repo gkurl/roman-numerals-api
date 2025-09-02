@@ -45,16 +45,16 @@ class ConvertInteger extends Command
        );
 
        if ($validator->fails()) {
-           $this->error('Invalid input: ' . $validator->errors()->first('integer'));
+           $this->error('Conversion Failed: ' . $validator->errors()->first('integer'));
            return 1;
        }
 
        try {
            $integer = (int) $validator->validated()['integer'];
            $convertedInteger = $this->conversionService->convertAndRecord($integer);
-           $this->info("$integer -> $convertedInteger->roman");
+           $this->info("Converted {$integer} to Roman: {$convertedInteger->roman}");
        } catch (\Exception $e) {
-            $this->error('Invalid input: ' . $e->getMessage());
+            $this->error('Conversion Failed: ' . $e->getMessage());
        }
 
        return 0;
