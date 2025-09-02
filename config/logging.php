@@ -57,6 +57,7 @@ return [
             'path' => storage_path('logs/conversions.log'),
             'level' => 'info',
             'days' => 14,
+            'tap' => [App\Logging\CustomJsonFormatter::class],
         ],
         'stack' => [
             'driver' => 'stack',
