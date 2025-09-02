@@ -27,14 +27,14 @@ class ConversionController extends Controller
         ]);
 
         $convertedInteger = $this->conversionService->convertAndRecord($request->integer);
-        return new ConversionResource($convertedInteger);
+        return new ConversionResource($convertedInteger); //new ConversionResource(...) here due to model being returned via ->first() in repo
     }
 
     public function recent(StatsRequest $statsRequest): AnonymousResourceCollection
     {
         $limit = $statsRequest->validatedLimit();
         $recentConversions = $this->conversionService->findRecent($limit);
-        return ConversionResource::collection($recentConversions);
+        return ConversionResource::collection($recentConversions); //::colection here so the ConversionStat model can be mapped over the actual eloquent collection return
     }
 
     public function top(StatsRequest $statsRequest): AnonymousResourceCollection
