@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\ConversionStat;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ConversionRepository implements ConversionRepositoryInterface
 {
@@ -20,6 +21,11 @@ class ConversionRepository implements ConversionRepositoryInterface
 
     // Went for singular atomic operation instead
     public function upsertOrIncrement(int $integer, String $roman, \DateTime $now) : ConversionStat {
+
+        Log::channel('conversions')->debug('upsertOrIncrement called', [
+            'integer' => $integer,
+            'roman' => $roman,
+        ]);
 
         DB::table('conversion_stats')->upsert(
             [

@@ -7,6 +7,7 @@ use App\Repositories\ConversionRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 //Could also be a 'final' class if not extended elsewhere
 class ConversionService implements ConversionServiceInterface
@@ -16,6 +17,9 @@ class ConversionService implements ConversionServiceInterface
         protected ConversionRepositoryInterface $conversionRepository,
     ) {}
 
+    /**
+     * @throws Throwable
+     */
     public function convertAndRecord(int $integer): ConversionStat {
 
         $roman = $this->romanNumeralConverter->convertInteger($integer);
@@ -34,7 +38,7 @@ class ConversionService implements ConversionServiceInterface
             ]);
 
             return $convertedOutput;
-        } catch(\Throwable $e) {
+        } catch(Throwable $e) {
             Log::channel('conversions')->error('conversion.failed', [
                 'user_id' => optional(auth()->user())->id,
                 'integer' => $integer,
@@ -42,6 +46,7 @@ class ConversionService implements ConversionServiceInterface
                 'error' => $e->getMessage(),
                 'correlation_id' => request()?->attributes->get('correlation_id'),
             ]);
+            throw $e; //Re-throw after logging in-case controllers/commands don't catch it
         }
     }
 
