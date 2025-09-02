@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
-class ConversionRepository
+class ConversionRepository implements ConversionRepositoryInterface
 {
 
     // Thought about maybe using DI here
