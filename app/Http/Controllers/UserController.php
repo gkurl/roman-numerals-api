@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    //keeping validation in-line throughout to save a bit of time here but would refactor into requests/dedicated validation function
     public function register(Request $request): JsonResponse
     {
         $data = $request->validate([

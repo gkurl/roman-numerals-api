@@ -10,11 +10,9 @@ use App\Services\ConversionService;
 class ConversionController extends Controller
 {
 
-    protected ConversionService $conversionService;
-
-    public function __construct(ConversionService $conversionService) {
-        $this->conversionService = $conversionService;
-    }
+    public function __construct(
+        protected ConversionService $conversionService
+    ){}
 
     //not sure if $request->integer is valid yet
     public function convert(ConversionRequest $request): ConversionResource

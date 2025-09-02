@@ -15,8 +15,7 @@ Homestead.json
 
 # Xdebug
 *.xt
-*.xdebug
-
+xdebug*/
 # NPM / Yarn / PNPM logs
 npm-debug.log*
 yarn-debug.log*
