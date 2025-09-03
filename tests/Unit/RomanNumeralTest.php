@@ -48,7 +48,7 @@ class RomanNumeralTest extends TestCase
         $this->assertSame('MMXVIII', $this->converter->convertInteger(2018));
     }
 
-    public function test_throws_for_out_of_range(): void
+    public function testThrowsOutOfRangeException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->converter->convertInteger(0);
