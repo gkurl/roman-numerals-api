@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Services\RomanNumeralConverter;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class RomanNumeralTest extends TestCase
@@ -45,5 +46,14 @@ class RomanNumeralTest extends TestCase
         $this->assertSame('MMMCMXCIX', $this->converter->convertInteger(3999));
         $this->assertSame('MMXVI', $this->converter->convertInteger(2016));
         $this->assertSame('MMXVIII', $this->converter->convertInteger(2018));
+    }
+
+    public function test_throws_for_out_of_range(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->converter->convertInteger(0);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->converter->convertInteger(4000);
     }
 }
