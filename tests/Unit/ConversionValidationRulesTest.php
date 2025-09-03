@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
 class ConversionValidationRulesTest extends TestCase
 {
-    public function test_accepts_valid_integers(): void
+    public function testAcceptsValidIntegers(): void
     {
         $validator = Validator::make(['integer' => 123], ConversionValidationRules::rules());
         $this->assertTrue($validator->passes());
     }
 
-    public function test_rejects_out_of_range_and_invalid(): void
+    public function testRejectsOutOfRangeAndInvalid(): void
     {
         $validator = Validator::make(['integer' => 0], ConversionValidationRules::rules());
         $this->assertTrue($validator->fails());

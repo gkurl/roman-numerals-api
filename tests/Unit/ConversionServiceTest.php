@@ -13,7 +13,8 @@ use Carbon\CarbonPeriod;
 use Tests\TestCase;
 class ConversionServiceTest extends TestCase
 {
-    public function test_convert_and_record_invokes_converter_and_repository(): void
+    public function testConvertAndRecordInvokesConverterAndRepository(): void
+
     {
         $converter = $this->createMock(IntegerConverterInterface::class);
         $converter->expects($this->once())

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ConvertIntegerCommandTest extends TestCase
 {
-    public function test_command_successful_conversion(): void
+    public function testCommandSuccesfullConversion(): void
     {
         $convertedNumber = new ConversionStat(['roman' => 'XXX']);
 
@@ -24,7 +24,7 @@ class ConvertIntegerCommandTest extends TestCase
             ->assertExitCode(0);
     }
 
-    public function test_command_invalid_input(): void
+    public function testCommandInvalidInput(): void
     {
         $this->artisan('roman:convert 0')
             ->expectsOutputToContain('Conversion Failed')
